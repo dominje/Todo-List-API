@@ -48,14 +48,17 @@ class TodoServiceTest {
 
         //given
         TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
-        Todo expected = new Todo();
+        Todo expected = new Todo(1, "ollah", false);
+        Todo updatedValue = new Todo(1, "ollah", true);
         TodoService todoService = new TodoService(todoRepository);
 
         //when
-        when(todoRepository.save(expected)).thenReturn(expected);
-        Todo actual = todoService.updateTodoStatus(expected);
+        when(todoRepository.findById(expected.getId())).thenReturn(java.util.Optional.of(expected));
+        when(todoRepository.save(expected)).thenReturn(updatedValue);
+
+        Todo actual = todoService.updateTodoStatus(updatedValue);
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(updatedValue.getStatus(), actual.getStatus());
     }
 }
