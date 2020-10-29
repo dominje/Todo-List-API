@@ -61,4 +61,25 @@ class TodoServiceTest {
         //then
         assertEquals(todo2.getStatus(), actual.getStatus());
     }
+
+    @Test
+    public void should_update_task_to_false_when_updating_status_given_todo_is_old(){
+
+        //given
+        TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
+        Todo todo1 = new Todo(1, "ollah", true);
+        Todo todo2 = new Todo(1, "ollah", false);
+        TodoService todoService = new TodoService(todoRepository);
+
+        //when
+        when(todoRepository.findById(todo1.getId())).thenReturn(java.util.Optional.of(todo1));
+        when(todoRepository.save(todo1)).thenReturn(todo2);
+
+        Todo actual = todoService.updateTodoStatus(todo1.getId(), todo2);
+
+        //then
+        assertEquals(todo2.getStatus(), actual.getStatus());
+    }
+
+
 }
