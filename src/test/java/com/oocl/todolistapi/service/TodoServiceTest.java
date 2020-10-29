@@ -81,5 +81,20 @@ class TodoServiceTest {
         assertEquals(todo2.getStatus(), actual.getStatus());
     }
 
+    @Test
+    public void should_delete_task_when_deleting_given_taskId(){
+        //given
+        TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
+        Todo expected = new Todo();
+        TodoService todoService = new TodoService(todoRepository);
+
+        //when
+        when(todoRepository.save(expected)).thenReturn(expected);
+        todoService.deleteTask(expected.getId());
+
+        //then
+        Mockito.verify(todoRepository).deleteById(expected.getId());
+    }
+
 
 }
