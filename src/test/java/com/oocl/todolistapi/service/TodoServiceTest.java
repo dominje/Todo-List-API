@@ -42,4 +42,20 @@ class TodoServiceTest {
         //then
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void should_update_task_to_true_when_updating_status_given_todo_is_newly_added(){
+
+        //given
+        TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
+        Todo expected = new Todo();
+        TodoService todoService = new TodoService(todoRepository);
+
+        //when
+        when(todoRepository.save(expected)).thenReturn(expected);
+        Todo actual = todoService.updateTodoStatus(expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
