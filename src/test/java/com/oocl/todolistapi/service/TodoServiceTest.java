@@ -27,4 +27,19 @@ class TodoServiceTest {
         //then
         assertEquals(expected.size(), actual.size());
     }
+
+    @Test
+    public void should_add_todo_when_add_given_to_do_item(){
+        //given
+        TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
+        Todo expected = new Todo();
+        TodoService todoService = new TodoService(todoRepository);
+
+        //when
+        when(todoRepository.save(expected)).thenReturn(expected);
+        Todo actual = todoService.addTodoList(expected);
+
+        //then
+        assertEquals(expected, actual);
+    }
 }
