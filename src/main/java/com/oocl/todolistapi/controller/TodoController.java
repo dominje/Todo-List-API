@@ -40,4 +40,9 @@ public class TodoController {
         Todo updatedToDo = todoService.updateTodoStatus(taskId, todo);
         return todoMapper.toResponse(updatedToDo);
     }
+
+    @DeleteMapping("/{taskId}")
+    public void deleteTodo(@PathVariable Integer taskId){
+        todoService.deleteTask(taskId);
+    }
 }

@@ -16,6 +16,11 @@ public class Todo {
     public Todo() {
     }
 
+    public Todo(String text) {
+        this.text = text;
+    }
+
+
     public Todo(Integer id, String text, boolean status) {
         Id = id;
         this.text = text;
