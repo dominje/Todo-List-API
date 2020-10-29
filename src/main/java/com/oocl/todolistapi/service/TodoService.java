@@ -5,6 +5,7 @@ import com.oocl.todolistapi.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -20,5 +21,14 @@ public class TodoService {
 
     public Todo addTodoList(Todo todo) {
         return todoRepository.save(todo);
+    }
+
+    public Todo updateTodoStatus(Integer taskId, Todo todo) {
+        Optional<Todo> originalTodo = todoRepository.findById(taskId);
+        if (originalTodo.isPresent()) {
+            originalTodo.get().setStatus(todo.getStatus());
+            return todoRepository.save(originalTodo.get());
+        }
+        return null;
     }
 }

@@ -33,4 +33,11 @@ public class TodoController {
         todoService.addTodoList(todo);
         return todoMapper.toResponse(todo);
     }
+
+    @PutMapping("/{taskId}")
+    public TodoResponse updateTodo(@PathVariable Integer taskId, @RequestBody TodoRequest request){
+        Todo todo = todoMapper.toEntity(request);
+        Todo updatedToDo = todoService.updateTodoStatus(taskId, todo);
+        return todoMapper.toResponse(updatedToDo);
+    }
 }
