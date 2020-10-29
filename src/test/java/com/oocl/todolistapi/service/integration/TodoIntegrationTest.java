@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class TodoIntegrationTest {
 
-    public static final String TODOS_URI = "/todos";
+    private static final String TODOS_URI = "/todos";
 
     @Autowired
     private TodoRepository todoRepository;
