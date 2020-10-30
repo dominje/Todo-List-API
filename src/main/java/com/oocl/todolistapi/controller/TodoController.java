@@ -21,17 +21,18 @@ public class TodoController {
         this.todoMapper = todoMapper;
     }
 
+
+    @PostMapping()
+    public TodoResponse createTodoItem(@RequestBody TodoRequest request){
+        Todo todo = todoMapper.toEntity(request);
+        todoService.addTodoList(todo);
+        return todoMapper.toResponse(todo);
+    }
+
     @GetMapping
     public List<TodoResponse> getAllTodos(){
         List<Todo> todoList = todoService.getAll();
         return todoList.stream().map(todoMapper::toResponse).collect(Collectors.toList());
-    }
-
-    @PostMapping
-    public TodoResponse addTodo(@RequestBody TodoRequest request){
-        Todo todo = todoMapper.toEntity(request);
-        todoService.addTodoList(todo);
-        return todoMapper.toResponse(todo);
     }
 
     @PutMapping("/{taskId}")
